@@ -30,7 +30,7 @@
                                  <div class="card-body">
                                      <div class="form-group">
                                          <label>Nama Jenis</label>
-                                         <input type="text" class="form-control" placeholder="Nama Jenis">
+                                         <input type="text" name="nama_jenis" class="form-control" placeholder="Nama Jenis">
                                      </div>
                                      <div class="form-group">
                                          <button type="submit" class="btn btn-primary">Submit</button>

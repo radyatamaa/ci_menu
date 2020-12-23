@@ -7,6 +7,7 @@ class Welcome extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('MSudi');
+		$this->load->database();
 	}
 	public function index()
 	{
@@ -30,18 +31,17 @@ class Welcome extends CI_Controller
 		if(isset($_POST['qty']) && isset($_POST['id_menu'])){
 			foreach($_POST['qty'] as $index1 => $qty){
 				foreach($_POST['id_menu'] as $index2 => $idMenu){
-					if($index1 == $index2){
+					if($index1 == $index2 && $qty != 0){
 						$menu = $this->MSudi->GetDataWhere('tbl_menu','id',$idMenu)->result();
 						$totalHargamenu = $menu[0]->harga_menu * $qty;
 						$totalharga = $totalharga + $totalHargamenu;
+						$add['id_menu'] = $idMenu;
 						$add['no_meja'] = $_POST['no_meja'];
 						$add['qty'] = $qty;
 						$add['total_harga_menu']  = $totalHargamenu;
 						$add['total_harga'] = $totalharga;
 						$add['status'] = 0;
 						$add['tgl_order'] = date("Y-m-d H:i:s");
-					
-		
 						 $this->MSudi->AddData('tbl_order', $add);
 					}
 				}

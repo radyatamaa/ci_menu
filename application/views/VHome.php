@@ -200,6 +200,7 @@ $.ajax({
   type: 'POST',
   success: function(data){
     alert(data);
+    location.reload();
   }
 });
   }

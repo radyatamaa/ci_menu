@@ -26,32 +26,51 @@
                  <div class="box-header with-border">
                      <div class="row">
                          <div class="col-12">
-                             <form role="form">
+                         <form action="<?php echo site_url('Welcome/AddDataMenu'); ?>" method="post" enctype="multipart/form-data">
                                  <div class="card-body">
                                      <div class="form-group">
                                          <label>Nama Menu</label>
-                                         <input type="text" class="form-control" placeholder="Nama Menu">
+                                         <input type="text" name="nama_menu" class="form-control" placeholder="Nama Menu">
                                      </div>
                                      <div class="form-group">
                                          <label>Foto Menu</label>
-                                         <input type="file" name="fileToUpload" id="fileToUpload">
+                                         <input type="file" name="userfile" >
                                      </div>
                                      <div class="form-group">
                                          <label>Harga Menu</label>
-                                         <input type="text" class="form-control" placeholder="Harga Menu">
+                                         <input type="text" name="harga_menu" class="form-control" placeholder="Harga Menu">
                                      </div>
                                      <div class="form-group">
                                          <label>Deskripsi Menu</label>
-                                         <input type="text" class="form-control" placeholder="Deskripsi Menu">
+                                         <input type="text" name="deskripsi_menu" class="form-control" placeholder="Deskripsi Menu">
                                      </div>
                                      <div class="form-group">
-                                         <label>Jenis Menu</label>
-                                         <select class="form-control ">
-                                             <option>
-                                                 Honda
-                                             </option>
-                                         </select>
+ 									<label>Jenis Menu</label>
+ 									<select class="form-control" name="id_jenis_menu" required>
+ 										<option selected disabled>Jenis Produk</option>
+ 										<?php
+											foreach ($JenisMenu as $ReadDS) {
+											?>
+ 											<option value="<?php echo $ReadDS->id; ?>"><?php echo $ReadDS->nama_jenis; ?></option>
+ 										<?php
+											}
+											?>
+ 									</select>
                                      </div>
+                                     <div class="form-group">
+ 									 <label>Company</label>
+ 									 <select class="form-control" name="id_company" required>
+ 										<option selected disabled>Company</option>
+ 										<?php
+											foreach ($Company as $ReadDS) {
+											?>
+ 											<option value="<?php echo $ReadDS->id; ?>"><?php echo $ReadDS->nama_company; ?></option>
+ 										<?php
+											}
+											?>
+ 									 </select>
+ 								     </div>
+
                                      <div class="form-group">
                                          <button type="submit" class="btn btn-primary">Submit</button>
                                      </div>

@@ -26,25 +26,28 @@
                  <div class="box-header with-border">
                      <div class="row">
                          <div class="col-12">
-                             <form role="form">
+                         <form action="<?php echo site_url('Welcome/AddDataUser'); ?>" method="post" enctype="multipart/form-data">
                                  <div class="card-body">
                                      <div class="form-group">
                                          <label>Username</label>
-                                         <input type="text" class="form-control" placeholder="Username">
+                                         <input type="text" name="username" class="form-control" placeholder="Username">
                                      </div>
                                      <div class="form-group">
                                          <label>Password</label>
-                                         <input type="password" class="form-control" placeholder="Password">
+                                         <input type="password" name="password" class="form-control" placeholder="Password">
                                      </div>
                                      <div class="form-group">
                                          <label>Fullname</label>
-                                         <input type="text" class="form-control" placeholder="Fullname">
+                                         <input type="text" name="fullname" class="form-control" placeholder="Fullname">
                                      </div>
                                      <div class="form-group">
-                                         <label>ID Level</label>
-                                         <select class="form-control ">
-                                             <option>
-                                                 Honda
+                                         <label>Hak Akses</label>
+                                         <select class="form-control " name="hak_akses">
+                                             <option value="1">
+                                                 Kasir
+                                             </option>
+                                             <option value="2">
+                                                 Admin
                                              </option>
                                          </select>
                                      </div>

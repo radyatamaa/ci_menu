@@ -21,136 +21,132 @@ class Welcome extends CI_Controller
 
 	public function DataUser()
 	{
-		// if ($this->session->userdata('Login')) {
-		// 	$data['nama'] = $this->session->userdata('nama');
-		// 	$data['level'] = $this->session->userdata('level');
 		$data['DataUser'] = $this->MSudi->GetData('tbl_user');
 		$data['content'] = 'VUser';
 		$this->load->view('welcome_message', $data);
-		// } else {
-		// 	redirect(site_url('Login'));
-		// }
 	}
 
 	public function VFormAddUser()
 	{
-		// if ($this->session->userdata('Login')) {
-		// 	$data['nama'] = $this->session->userdata('nama');
-		// 	$data['level'] = $this->session->userdata('level');
-
 		$data['content'] = 'VFormAddUser';
 		$this->load->view('welcome_message', $data);
-		// } else {
-		// 	redirect(site_url('Login'));
-		// }
+
+	}
+
+	public function AddDataUser()
+	{
+		$add['id'] = $this->input->post('id');
+		$add['username'] = $this->input->post('username');
+		$add['password'] = $this->input->post('password');
+		$add['fullname'] = $this->input->post('fullname');
+		$add['hak_akses'] = $this->input->post('hak_akses');
+		$this->MSudi->AddData('tbl_user', $add);
+		redirect(site_url('Welcome/DataUser'));
+
 	}
 
 	public function VFormUpdateUser()
 	{
-		// if ($this->session->userdata('Login')) {
-		// 	$data['nama'] = $this->session->userdata('nama');
-		// 	$data['level'] = $this->session->userdata('level');
+
 
 		$data['content'] = 'VFormUpdateUser';
 		$this->load->view('welcome_message', $data);
-		// } else {
-		// 	redirect(site_url('Login'));
-		// }
+
 	}
 
 	public function DataJenisMenu()
 	{
-		// if ($this->session->userdata('Login')) {
-		// 	$data['nama'] = $this->session->userdata('nama');
-		// 	$data['level'] = $this->session->userdata('level');
+
 		$data['DataJenisMenu'] = $this->MSudi->GetData('tbl_jenis_menu');
 		$data['content'] = 'VJenisMenu';
 		$this->load->view('welcome_message', $data);
 
-		// $data['content'] = 'VJenisMenu';
-		// $this->load->view('welcome_message', $data);
-		// } else {
-		// 	redirect(site_url('Login'));
-		// }
+
 	}
 	public function VFormAddJenisMenu()
 	{
-		// if ($this->session->userdata('Login')) {
-		// 	$data['nama'] = $this->session->userdata('nama');
-		// 	$data['level'] = $this->session->userdata('level');
+
 
 		$data['content'] = 'VFormAddJenisMenu';
 		$this->load->view('welcome_message', $data);
-		// } else {
-		// 	redirect(site_url('Login'));
-		// }
+
 	}
 
+	public function AddDataJenisMenu()
+	{
+	$add['id'] = $this->input->post('id');
+	$add['nama_jenis'] = $this->input->post('nama_jenis');
+	$this->MSudi->AddData('tbl_jenis_menu', $add);
+	redirect(site_url('Welcome/DataJenisMenu'));
+
+	}
+
+	
 	public function VFormUpdateJenisMenu()
 	{
-		// if ($this->session->userdata('Login')) {
-		// 	$data['nama'] = $this->session->userdata('nama');
-		// 	$data['level'] = $this->session->userdata('level');
-
 		$data['content'] = 'VFormUpdateJenisMenu';
 		$this->load->view('welcome_message', $data);
-		// } else {
-		// 	redirect(site_url('Login'));
-		// }
 	}
 
 
 	public function DataMenu()
 	{
-		// if ($this->session->userdata('Login')) {
-		// 	$data['nama'] = $this->session->userdata('nama');
-		// 	$data['level'] = $this->session->userdata('level');
-		$join = "tbl_jenis_menu.id_jenis = tbl_menu.kd_jenis_menu  ";
+
+		$join = "tbl_jenis_menu.id = tbl_menu.id_jenis_menu  ";
 		$data['DataMenu'] = $this->MSudi->GetDataJoin('tbl_jenis_menu', 'tbl_menu', $join)->result();
 		$data['content'] = 'VMenu';
 		$this->load->view('welcome_message', $data);
-		// } else {
-		// 	redirect(site_url('Login'));
-		// }
+
 	}
 
 	public function VFormAddMenu()
 	{
-		// if ($this->session->userdata('Login')) {
-		// 	$data['nama'] = $this->session->userdata('nama');
-		// 	$data['level'] = $this->session->userdata('level');
 
+		$data['JenisMenu'] = $this->MSudi->GetData('tbl_jenis_menu');
+		$data['Company'] = $this->MSudi->GetData('tbl_company');
 		$data['content'] = 'VFormAddMenu';
 		$this->load->view('welcome_message', $data);
-		// } else {
-		// 	redirect(site_url('Login'));
-		// }
+
+	}
+
+	public function AddDataMenu()
+	{
+		$add['id'] = $this->input->post('id');
+		$add['nama_menu'] = $this->input->post('nama_menu');
+		$add['harga_menu'] = $this->input->post('harga_menu');
+		$add['deskripsi_menu'] = $this->input->post('deskripsi_menu');
+		$add['id_jenis_menu'] = $this->input->post('id_jenis_menu');
+		$add['id_company'] = $this->input->post('id_company');
+
+		$config['upload_path'] = '././upload/menu';
+		$config['allowed_types'] = 'gif|jpg|png|JPG';
+		$this->load->library('upload', $config);
+		if (!$this->upload->do_upload('userfile')) {
+			$error = array('error' => $this->upload->display_errors());
+			redirect(site_url('Welcome/VFormAddMenu'));
+		} else {
+			$data = array('upload_data' => $this->upload->data());
+			$add['foto_menu'] = implode($this->upload->data());
+			$filename = site_url('upload/') . 'menu/' . $add['foto_menu'];
+			$replcate = str_replace("index.php/", "", $filename);
+			$replcate = str_replace("\/", "/", $replcate);
+			$add['foto_menu'] = $replcate;
+		}
+		$this->MSudi->AddData('tbl_menu', $add);
+		redirect(site_url('Welcome/DataMenu'));
+
 	}
 
 	public function VFormUpdateMenu()
 	{
-		// if ($this->session->userdata('Login')) {
-		// 	$data['nama'] = $this->session->userdata('nama');
-		// 	$data['level'] = $this->session->userdata('level');
-
 		$data['content'] = 'VFormUpdateMenu';
 		$this->load->view('welcome_message', $data);
-		// } else {
-		// 	redirect(site_url('Login'));
-		// }
 	}
 
 	public function DataPesanan()
 	{
-		// if ($this->session->userdata('Login')) {
-		// 	$data['nama'] = $this->session->userdata('nama');
-		// 	$data['level'] = $this->session->userdata('level');
-
 		$data['content'] = 'VPesanan';
 		$this->load->view('welcome_message', $data);
-		// } else {
-		// 	redirect(site_url('Login'));
-		// }
 	}
 
 	public function Logout()

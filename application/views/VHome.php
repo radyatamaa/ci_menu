@@ -18,7 +18,7 @@
                             if (!empty($DataJenis)) {
                                 foreach ($DataJenis as $ReadDS) {
                             ?>
-                <li><a href="#<?php echo $ReadDS->id_jenis; ?>" data-toggle="tab"><?php echo $ReadDS->nama_jenis; ?></a></li>
+                <li><a href="#<?php echo $ReadDS->id; ?>" data-toggle="tab"><?php echo $ReadDS->nama_jenis; ?></a></li>
                 <!-- <li><a href="#non-coffee" data-toggle="tab">Non-Coffee</a></li> -->
                 <?php
                                 }
@@ -29,9 +29,16 @@
               </ul>
               <!-- Tab panes -->
               <div class="tab-content">
-                <div class="tab-pane fade in active" id="coffee">
+                <div class="tab-pane fade in active" id="1">
                   <div class="mu-tab-content-area">
                     <div class="row">
+                    
+                    <?php if (count($DataMenu) > 0) {
+                      foreach($DataMenu as $index => $menu){
+                        
+                    ?>
+
+                    <?php if ($index % 2 != 0){  ?>
 
                       <div class="col-md-6">
                         <div class="mu-tab-content-left">
@@ -40,50 +47,23 @@
                               <div class="media">
                               <div class="media-left">
                                   <a href="#">
-                                  <img  class="media-object" src="<?php echo base_url('assets/assets/img/americano.jpg'); ?>" alt="img">
+                                  <img  class="media-object" src="<?php echo base_url('upload/' . $menu->foto_menu); ?>" alt="img">
                                   </a>
                                 </div>
                                 <div class="media-body">
-                                  <h4 class="media-heading">English Breakfast</h4>
-                                  <span class="mu-menu-price">$15.85</span>
-                                  <p><input class="mu-menu-price" type="number" id="quantity" name="quantity" min="1" max="100"></p>
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere nulla aliquid praesentium dolorem commodi illo.</p>
-                                </div>
-                              </div>
-                            </li>
-                             <li>
-                              <div class="media">
-                                <div class="media-left">
-                                  <a href="#">
-                                  <img  class="media-object" src="<?php echo base_url('assets/assets/img/americano.jpg'); ?>" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading">English Breakfast</h4>
-                                  <span class="mu-menu-price">$15.85</span>
-                                  <p><input class="mu-menu-price" type="number" id="quantity" name="quantity" min="1" max="100"></p>
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere nulla aliquid praesentium dolorem commodi illo.</p>
-                                </div>
-                              </div>
-                            </li>
-                             <li>
-                              <div class="media">
-                              <div class="media-left">
-                                  <a href="#">
-                                  <img  class="media-object" src="<?php echo base_url('assets/assets/img/americano.jpg'); ?>" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading">English Breakfast</h4>
-                                  <span class="mu-menu-price">$15.85</span>
-                                  <p><input class="mu-menu-price" type="number" id="quantity" name="quantity" min="1" max="100"></p>
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere nulla aliquid praesentium dolorem commodi illo.</p>
+                                  <h4 class="media-heading"><?php echo $menu->nama_menu . ' ' . $menu->nama_company; ?></h4>
+                                  <span class="mu-menu-price"><?php echo 'Rp. ' . $menu->harga_menu; ?></span>
+                                  <input type="hidden" name="id_menu[]" value="<?php echo $menu->id; ?>">                  
+                                  <p><input class="mu-menu-price" type="number" name="qty[]" min="1" max="100"></p>
+                                  <p><?php echo $menu->deskripsi_menu; ?></p>
                                 </div>
                               </div>
                             </li>
                           </ul>   
                         </div>
                       </div>
+
+                    <?php }else{  ?>
 
                      <div class="col-md-6">
                        <div class="mu-tab-content-right">
@@ -92,44 +72,15 @@
                               <div class="media">
                               <div class="media-left">
                                   <a href="#">
-                                  <img  class="media-object" src="<?php echo base_url('assets/assets/img/americano.jpg'); ?>" alt="img">
+                                  <img  class="media-object" src="<?php echo base_url('upload/' . $menu->foto_menu); ?>" alt="img">
                                   </a>
                                 </div>
                                 <div class="media-body">
-                                  <h4 class="media-heading">English Breakfast</h4>
-                                  <span class="mu-menu-price">$15.85</span>
-                                  <p><input class="mu-menu-price" type="number" id="quantity" name="quantity" min="1" max="100"></p>
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere nulla aliquid praesentium dolorem commodi illo.</p>
-                                </div>
-                              </div>
-                            </li>
-                             <li>
-                              <div class="media">
-                              <div class="media-left">
-                                  <a href="#">
-                                  <img  class="media-object" src="<?php echo base_url('assets/assets/img/americano.jpg'); ?>" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading">English Breakfast</h4>
-                                  <span class="mu-menu-price">$15.85</span>
-                                  <p><input class="mu-menu-price" type="number" id="quantity" name="quantity" min="1" max="100"></p>
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere nulla aliquid praesentium dolorem commodi illo.</p>
-                                </div>
-                              </div>
-                            </li>
-                             <li>
-                              <div class="media">
-                              <div class="media-left">
-                                  <a href="#">
-                                  <img  class="media-object" src="<?php echo base_url('assets/assets/img/americano.jpg'); ?>" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading">English Breakfast</h4>
-                                  <span class="mu-menu-price">$15.85</span>
-                                  <p><input class="mu-menu-price" type="number" id="quantity" name="quantity" min="1" max="100"></p>
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere nulla aliquid praesentium dolorem commodi illo.</p>
+                                  <h4 class="media-heading"><?php echo $menu->nama_menu . ' ' . $menu->nama_company; ?></h4>
+                                  <span class="mu-menu-price"><?php echo 'Rp. ' . $menu->harga_menu; ?></span>
+                                  <input type="hidden" name="id_menu[]" value="<?php echo $menu->id; ?>">                  
+                                  <p><input class="mu-menu-price" type="number" name="qty[]" min="1" max="100"></p>
+                                  <p><?php echo $menu->deskripsi_menu; ?></p>
                                 </div>
                               </div>
                             </li>
@@ -137,14 +88,21 @@
                        </div>
                      </div>
                     
-
+                    <?php }} }?>
                    </div>
                  </div>
                 </div>
 
-                <div class="tab-pane fade" id="non-coffee">
+                <div class="tab-pane fade" id="2">
                   <div class="mu-tab-content-area">
                     <div class="row">
+
+                    <?php if (count($DataMenuNonCoffe) > 0) {
+                      foreach($DataMenuNonCoffe as $index => $menu){
+                        
+                    ?>
+
+                    <?php if ($index % 2 != 0){  ?>
 
                       <div class="col-md-6">
                         <div class="mu-tab-content-left">
@@ -153,47 +111,23 @@
                               <div class="media">
                               <div class="media-left">
                                   <a href="#">
-                                  <img  class="media-object" src="<?php echo base_url('assets/assets/img/americano.jpg'); ?>" alt="img">
+                                  <img  class="media-object" src="<?php echo base_url('upload/' . $menu->foto_menu); ?>" alt="img">
                                   </a>
                                 </div>
                                 <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">English Breakfast</a></h4>
-                                  <span class="mu-menu-price">$15.85</span>
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere nulla aliquid praesentium dolorem commodi illo.</p>
-                                </div>
-                              </div>
-                            </li>
-                             <li>
-                              <div class="media">
-                              <div class="media-left">
-                                  <a href="#">
-                                  <img  class="media-object" src="<?php echo base_url('assets/assets/img/americano.jpg'); ?>" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">Chines Breakfast</a></h4>
-                                  <span class="mu-menu-price">$11.95</span>
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere nulla aliquid praesentium dolorem commodi illo.</p>
-                                </div>
-                              </div>
-                            </li>
-                             <li>
-                              <div class="media">
-                              <div class="media-left">
-                                  <a href="#">
-                                  <img  class="media-object" src="<?php echo base_url('assets/assets/img/americano.jpg'); ?>" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">Indian Breakfast</a></h4>
-                                  <span class="mu-menu-price">$15.85</span>
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere nulla aliquid praesentium dolorem commodi illo.</p>
+                                  <h4 class="media-heading"><?php echo $menu->nama_menu . ' ' . $menu->nama_company; ?></h4>
+                                  <span class="mu-menu-price"><?php echo 'Rp. ' . $menu->harga_menu; ?></span>
+                                  <input type="hidden" name="id_menu[]" value="<?php echo $menu->id; ?>">                  
+                                  <p><input class="mu-menu-price" type="number" name="qty[]" min="1" max="100"></p>
+                                  <p><?php echo $menu->deskripsi_menu; ?></p>
                                 </div>
                               </div>
                             </li>
                           </ul>   
                         </div>
                       </div>
+
+                    <?php }else{  ?>
 
                      <div class="col-md-6">
                        <div class="mu-tab-content-right">
@@ -202,52 +136,33 @@
                               <div class="media">
                               <div class="media-left">
                                   <a href="#">
-                                  <img  class="media-object" src="<?php echo base_url('assets/assets/img/americano.jpg'); ?>" alt="img">
+                                  <img  class="media-object" src="<?php echo base_url('upload/' . $menu->foto_menu); ?>" alt="img">
                                   </a>
                                 </div>
                                 <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">English Breakfast</a></h4>
-                                  <span class="mu-menu-price">$15.85</span>
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere nulla aliquid praesentium dolorem commodi illo.</p>
-                                </div>
-                              </div>
-                            </li>
-                             <li>
-                              <div class="media">
-                              <div class="media-left">
-                                  <a href="#">
-                                  <img  class="media-object" src="<?php echo base_url('assets/assets/img/americano.jpg'); ?>" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">Chines Breakfast</a></h4>
-                                  <span class="mu-menu-price">$11.95</span>
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere nulla aliquid praesentium dolorem commodi illo.</p>
-                                </div>
-                              </div>
-                            </li>
-                             <li>
-                              <div class="media">
-                              <div class="media-left">
-                                  <a href="#">
-                                  <img  class="media-object" src="<?php echo base_url('assets/assets/img/americano.jpg'); ?>" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><a href="#">Indian Breakfast</a></h4>
-                                  <span class="mu-menu-price">$15.85</span>
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere nulla aliquid praesentium dolorem commodi illo.</p>
+                                  <h4 class="media-heading"><?php echo $menu->nama_menu . ' ' . $menu->nama_company; ?></h4>
+                                  <span class="mu-menu-price"><?php echo 'Rp. ' . $menu->harga_menu; ?></span>
+                                  <input type="hidden" name="id_menu[]" value="<?php echo $menu->id; ?>">                  
+                                  <p><input class="mu-menu-price" type="number" name="qty[]" min="1" max="100"></p>
+                                  <p><?php echo $menu->deskripsi_menu; ?></p>
                                 </div>
                               </div>
                             </li>
                           </ul>   
                        </div>
                      </div>
+                    
+                    <?php }} }?>
 
                    </div>
                  </div>
                 </div>
-                <button type="submit" class="mu-readmore-btn">Make Reservation</button>
+
+                <div class="form-group">
+                <input id="no_meja" name="no_meja" type="text" class="form-control" placeholder="No Meja">
+                </div>
+
+                <button type="submit" class="mu-readmore-btn" onclick="AddOrder()">Make Reservation</button>
                    </div>
                  </div>
                 </div>
@@ -259,3 +174,33 @@
     </div>
   </section>
   <!-- End Restaurant Menu -->
+
+  <script>
+  function AddOrder(){
+    var fd = new FormData(); 
+    var noMeja = document.getElementById("no_meja").value;
+    fd.append( 'no_meja', noMeja);   
+    var elements = document.getElementsByName("qty[]");
+    for(var x=0; x < elements.length; x++)   // comparison should be "<" not "<="
+    {
+      fd.append( 'qty[]', elements[x].value);
+    }
+  
+    var elementsMenu = document.getElementsByName("id_menu[]");
+    for(var x=0; x < elementsMenu.length; x++)   // comparison should be "<" not "<="
+    {
+      fd.append('id_menu[]', elementsMenu[x].value);
+    }
+
+$.ajax({
+  url: "<?php echo site_url(); ?>" + "/Welcome/AddOrder",
+  data: fd,
+  processData: false,
+  contentType: false,
+  type: 'POST',
+  success: function(data){
+    alert(data);
+  }
+});
+  }
+  </script>

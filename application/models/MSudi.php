@@ -83,6 +83,17 @@ class MSudi extends CI_Model
         $query = $this->db->get();
         return $query;
     }
+
+    function GetDataJoinWhereMenu($tbl1, $tbl2, $param, $where, $id)
+    {
+        $this->db->select($tbl1 .'.*,' . $tbl2 . '.nama_company');
+        $this->db->from($tbl1);
+        $this->db->join($tbl2, $param);
+        $this->db->where($where, $id);
+        $query = $this->db->get();
+        return $query;
+    }
+
     function GetData2Join($tbl1, $tbl2, $tbl3, $param)
     {
         $this->db->select('*');

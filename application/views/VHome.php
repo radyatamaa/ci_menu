@@ -206,7 +206,7 @@
   contentType: false,
   type: 'POST',
   success: function(data){
-    alert('Sukses Order');
+    alert('sukses order');
     
     $("#dialog").dialog({
                 modal: true,
@@ -224,6 +224,21 @@
                     var object = `<!DOCTYPE html>
 <html>
 <head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+ th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+
+</style>
 <title>Biling Pesanan</title>
 </head>
 <body>
@@ -235,16 +250,32 @@
 <td>: ` + request.noMeja + `</td>
 </tr>
 <tr>
-<td>Total Yang Harus Di Bayar</td>
+<td>Total</td>
 <td>: ` + request.totalharga + `</td>
 </tr>
 <tr>
 <td>Status </td>
 <td>: ` + request.status + `</td>
 </tr>
+<tr>
+    <th>Nama Menu</th>
+    <th>QTY</th>
+    <th>Harga Satuan</th>
+    <th>Total Harga</th>
+  </tr>
+`;
+if(request.listMenu.length > 0){
+  request.listMenu.forEach(function(entry) {
+    object = object + `<tr>
+    <td>` + entry.namaMenu + `</td>
+    <td>` + entry.qty + `</td>
+    <td>` + entry.hargaSatuan + `</td>
+    <td>` + entry.totalHarga + `</td>
+  </tr> `;
+    }); 
+  }
 
-
-
+object = object + `
 </table>
 
 </body>

@@ -28,6 +28,7 @@ class Welcome extends CI_Controller
 	public function AddOrder()
 	{
 		$totalharga = 0;
+		$listMenu = [];
 		if(isset($_POST['qty']) && isset($_POST['id_menu'])){
 			foreach($_POST['qty'] as $index1 => $qty){
 				foreach($_POST['id_menu'] as $index2 => $idMenu){
@@ -42,7 +43,15 @@ class Welcome extends CI_Controller
 						$add['total_harga'] = $totalharga;
 						$add['status'] = 0;
 						$add['tgl_order'] = date("Y-m-d H:i:s");
-						 $this->MSudi->AddData('tbl_order', $add);
+
+						$this->MSudi->AddData('tbl_order', $add);
+						
+						$obj = new stdClass();
+						$obj->namaMenu = $menu[0]->nama_menu;
+						$obj->qty = $qty;
+						$obj->hargaSatuan = $menu[0]->harga_menu;
+						$obj->totalHarga = $totalHargamenu;
+						array_push($listMenu,$obj);
 					}
 				}
 			}
@@ -51,7 +60,8 @@ class Welcome extends CI_Controller
 		$myObj->totalharga = $totalharga;
 		$myObj->status = "Belum Bayar";
 		$myObj->noMeja = $_POST['no_meja'];
-		
+		$myObj->listMenu = $listMenu;
+
 		$myJSON = json_encode($myObj);
 		
 		echo $myJSON;

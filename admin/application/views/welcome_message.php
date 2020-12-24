@@ -110,6 +110,14 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href="<?php echo site_url('Welcome/DataCompany'); ?>" class="nav-link">
+                <i class="nav-icon fa fa-bullseye"></i>
+                <p>
+                  Nama Perusahaan
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
                 <a href="<?php echo site_url('Welcome/Logout'); ?>" class="nav-link" onclick="Logout()">
                   <i class="nav-icon fa fa-arrow-left"></i>
                   <p>Logout</p>

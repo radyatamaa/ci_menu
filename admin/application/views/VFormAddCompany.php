@@ -5,7 +5,7 @@
          <div class="container-fluid">
              <div class="row mb-2">
                  <div class="col-sm-6">
-                     <h1 class="m-0 text-dark">Edit Laporan Kerusakan</h1>
+                     <h1 class="m-0 text-dark">Tambah Nama Perusahaan</h1>
                  </div>
                  <!-- <div class="col-sm-6">
                      <ol class="breadcrumb float-sm-right">
@@ -26,12 +26,11 @@
                  <div class="box-header with-border">
                      <div class="row">
                          <div class="col-12">
-                         <form action="<?php echo site_url('Welcome/UpdateDataJenisMenu'); ?>" method="post" enctype="multipart/form-data">
+                         <form action="<?php echo site_url('Welcome/AddDataCompany'); ?>" method="post" enctype="multipart/form-data">
                                  <div class="card-body">
-                                    <div class="form-group">
- 										<label>Nama Jenis</label>
- 										<input type="hidden" name="id" value="<?php echo $detail['id']; ?>" class="form-control">
- 										<input type="text" class="form-control" name="nama_jenis" value="<?php echo $detail['nama_jenis']; ?>" placeholder="Username">
+                                     <div class="form-group">
+                                         <label>Nama Perusahaan</label>
+                                         <input type="text" name="nama_company" class="form-control" placeholder="Nama Company">
                                      </div>
                                      <div class="form-group">
                                          <button type="submit" class="btn btn-primary">Submit</button>

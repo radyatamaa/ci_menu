@@ -47,7 +47,15 @@ class Welcome extends CI_Controller
 				}
 			}
 		}
-		redirect(site_url('Welcome'));
+		$myObj = new stdClass();
+		$myObj->totalharga = $totalharga;
+		$myObj->status = "Belum Bayar";
+		$myObj->noMeja = $_POST['no_meja'];
+		
+		$myJSON = json_encode($myObj);
+		
+		echo $myJSON;
+
 	}
 
 }

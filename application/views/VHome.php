@@ -162,8 +162,11 @@
                 <input id="no_meja" name="no_meja" type="text" class="form-control" placeholder="No Meja">
                 </div>
 
-                <button type="submit" class="mu-readmore-btn" onclick="AddOrder()">Make Reservation</button>
+                <button id="btnShow" type="submit" class="mu-readmore-btn">Make Reservation</button>
                    </div>
+                   <!-- <input id="btnShow" type="button" value="Show PDF" /> -->
+<div id="dialog" style="display: none">
+</div>
                  </div>
                 </div>
               </div>
@@ -174,10 +177,15 @@
     </div>
   </section>
   <!-- End Restaurant Menu -->
-
-  <script>
-  function AddOrder(){
-    var fd = new FormData(); 
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/jquery-ui.js" type="text/javascript"></script>
+  <link href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/themes/blitzer/jquery-ui.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript">
+    jQuery(function($){
+        var fileName = "Bill Pesanan";
+        $("#btnShow").click(function () {
+          debugger
+          var fd = new FormData(); 
     var noMeja = document.getElementById("no_meja").value;
     fd.append( 'no_meja', noMeja);   
     var elements = document.getElementsByName("qty[]");
@@ -191,17 +199,98 @@
     {
       fd.append('id_menu[]', elementsMenu[x].value);
     }
-
-$.ajax({
+    $.ajax({
   url: "<?php echo site_url(); ?>" + "/Welcome/AddOrder",
   data: fd,
   processData: false,
   contentType: false,
   type: 'POST',
   success: function(data){
-    alert(data);
-    location.reload();
+    alert('sukses order');
+    
+    $("#dialog").dialog({
+                modal: true,
+                title: fileName,
+                width: 540,
+                height: 450,
+                buttons: {
+                    Close: function () {
+                        $(this).dialog('close');
+                        location.reload();
+                    }
+                },
+                open: function () {
+                  var request = JSON.parse(data);
+                    var object = `<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+ th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+
+</style>
+<title>Biling Pesanan</title>
+</head>
+<body>
+
+<h1>Biling Pesanan</h1>
+<table>
+<tr>
+<td>No Meja</td>
+<td>: ` + request.noMeja + `</td>
+</tr>
+<tr>
+<td>Total</td>
+<td>: ` + request.totalharga + `</td>
+</tr>
+<tr>
+<td>Status </td>
+<td>: ` + request.status + `</td>
+</tr>
+<tr>
+    <th>Nama Menu</th>
+    <th>QTY</th>
+    <th>Harga Satuan</th>
+    <th>Total Harga</th>
+  </tr>
+`;
+if(request.listMenu.length > 0){
+  request.listMenu.forEach(function(entry) {
+    object = object + `<tr>
+    <td>` + entry.namaMenu + `</td>
+    <td>` + entry.qty + `</td>
+    <td>` + entry.hargaSatuan + `</td>
+    <td>` + entry.totalHarga + `</td>
+  </tr> `;
+    }); 
   }
-});
+
+object = object + `
+</table>
+
+</body>
+</html>
+`;
+           
+                    $("#dialog").html(object);
+                }
+            });
+
+            
   }
-  </script>
+  });
+          
+        });
+    });
+</script>
+

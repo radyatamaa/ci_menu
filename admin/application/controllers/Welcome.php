@@ -48,7 +48,6 @@ class Welcome extends CI_Controller
 		$this->load->view('welcome_message', $data);
 
 	}
-
 	public function AddDataUser()
 	{
 		$add['id'] = $this->input->post('id');
@@ -58,9 +57,7 @@ class Welcome extends CI_Controller
 		// $add['hak_akses'] = $this->input->post('hak_akses');
 		$this->MSudi->AddData('tbl_user', $add);
 		redirect(site_url('Welcome/DataUser'));
-
 	}
-
 	public function UpdateDataUser()
 	{
 		$id = $this->input->post('id');
@@ -71,10 +68,7 @@ class Welcome extends CI_Controller
 		redirect(site_url('Welcome/DataUser'));
 
 	}
-
 // End Controller Data User
-
-
 // Controller Data Jenis Menu
 	public function DataJenisMenu()
 	{
@@ -111,14 +105,39 @@ class Welcome extends CI_Controller
 		redirect(site_url('Welcome/DataJenisMenu'));
 	}
 
+	public function DeleteDataMenu()
+	{
+		$id = $this->uri->segment(3);
+		$this->MSudi->DeleteData('tbl_jenis_menu', 'id', $id);
+
+		redirect(site_url('Welcome/DataJenisMenu'));
+	}
+
 // End Controller Data Jenis Menu
 
 // Start Controller Data Menu
 	public function DataMenu()
 	{
-		$join = "tbl_jenis_menu.id = tbl_menu.id_jenis_menu  ";
-		$data['DataMenu'] = $this->MSudi->GetDataJoin('tbl_jenis_menu', 'tbl_menu', $join)->result();
-		$data['content'] = 'VMenu';
+		if ($this->uri->segment(4) == 'view') {
+			$id = $this->uri->segment(3);
+			$tampil = $this->MSudi->GetDataWhere('tbl_menu', 'id', $id)->row();
+			$jenis = $this->MSudi->GetData('tbl_jenis_menu');
+			$company = $this->MSudi->GetData('tbl_company');
+			$data['detail']['id'] = $tampil->id;
+			$data['detail']['nama_menu'] = $tampil->nama_menu;
+			$data['detail']['foto_menu'] = $tampil->foto_menu;
+			$data['detail']['harga_menu'] = $tampil->harga_menu;
+			$data['detail']['deskripsi_menu'] = $tampil->deskripsi_menu;
+			$data['detail']['id_jenis_menu'] = $tampil->id_jenis_menu;
+			$data['detail']['jenis'] = $jenis;
+			$data['detail']['company'] = $company;
+			$data['content'] = 'VFormUpdateMenu';
+		} else {
+			$join = "tbl_jenis_menu.id = tbl_menu.id_jenis_menu";
+			$join1 = "tbl_company.id = tbl_menu.id_company";
+			$data['DataMenu'] = $this->MSudi->GetData2JoinBaru('tbl_menu', 'tbl_jenis_menu','tbl_company', $join, $join1)->result();
+			$data['content'] = 'VMenu';
+		}
 		$this->load->view('welcome_message', $data);
 	}
 
@@ -158,19 +177,49 @@ class Welcome extends CI_Controller
 
 	}
 
-	public function VFormUpdateMenu()
+	public function UpdateDataMenu()
 	{
-		$data['content'] = 'VFormUpdateMenu';
-		$this->load->view('welcome_message', $data);
+		$id = $this->input->post('id');
+		$update['nama_menu'] = $this->input->post('nama_menu');
+		$update['foto_menu'] = $this->input->post('foto_menu');
+		$update['harga_menu'] = $this->input->post('harga_menu');
+		$update['deskripsi_menu'] = $this->input->post('deskripsi_menu');
+		$update['id_jenis_menu'] = $this->input->post('id_jenis_menu');
+		$update['id_company'] = $this->input->post('id_company');
+
+		$config['upload_path'] = '././upload/menu';
+		$config['allowed_types'] = 'gif|jpg|png|JPG';
+		$this->load->library('upload', $config);
+		if (!$this->upload->do_upload('userfile')) {
+			$error = array('error' => $this->upload->display_errors());
+			//redirect(site_url('Welcome/VFormUpdateUser'));
+
+		} else {
+			$data = array('upload_data' => $this->upload->data());
+			$update['foto_menu'] = implode($this->upload->data());
+		}
+
+		$this->MSudi->UpdateData('tbl_menu', 'id', $id, $update);
+		redirect(site_url('Welcome/DataMenu'));
 	}
 // End Controller Data Menu
 
 // Start Controller Data Pesanan
 	public function DataPesanan()
 	{
+		$data['DataOrder'] = $this->MSudi->GetDataJoin('tbl_order','tbl_menu','tbl_order.id_menu = tbl_menu.id')->result();
 		$data['content'] = 'VPesanan';
 		$this->load->view('welcome_message', $data);
 	}
+
+	public function UpdateStatus()
+	{
+		$id = $_GET['id'];
+		$update['status'] = 1;
+		$this->MSudi->UpdateData('tbl_order', 'id', $id, $update);
+		redirect(site_url('Welcome/DataPesanan'));
+	}
+
 // End Controller Data User	
 
 // Start Controller Data Company
@@ -212,18 +261,11 @@ class Welcome extends CI_Controller
 
 	public function DeleteDataCompany()
 	{
-		// $data['username'] = $this->session->userdata('username');
-		// $data['foto'] = $this->session->userdata('foto');
-		$id = $this->input->post('id');
-
-		foreach ($id as $id_id) {
-		$this->MSudi->DeleteData('tbl_company', 'id', $id_id);
-		}
+		$id = $this->uri->segment(3);
+		$this->MSudi->DeleteData('tbl_company', 'id', $id);
 
 		redirect(site_url('Welcome/DataCompany'));
 	}
-
-
 	// End Controller Data Company
 
 	public function Logout()

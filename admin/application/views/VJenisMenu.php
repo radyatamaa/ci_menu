@@ -50,9 +50,9 @@
                                                             <a href="<?php echo site_url('Welcome/DataJenisMenu/' . $ReadDS->id . '/view'); ?>" class="btn btn-xs btn-info">
                                                                 Edit
                                                             </a>
-                                                            <a class="btn btn-xs btn-danger" href="">
-                                                                Delete
-                                                            </a>
+                                                            <a href="<?php echo site_url('Welcome/DeleteDataMenu/' . $ReadDS->id); ?>" class="btn btn-xs btn-danger">
+                                                 Delete
+                                             </a>
                                                         </td>
 													</tr>
 											<?php

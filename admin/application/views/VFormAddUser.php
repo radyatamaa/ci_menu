@@ -40,7 +40,7 @@
                                          <label>Fullname</label>
                                          <input type="text" name="fullname" class="form-control" placeholder="Fullname">
                                      </div>
-                                     <div class="form-group">
+                                     <!-- <div class="form-group">
                                          <label>Hak Akses</label>
                                          <select class="form-control " name="hak_akses">
                                              <option value="1">
@@ -50,7 +50,7 @@
                                                  Admin
                                              </option>
                                          </select>
-                                     </div>
+                                     </div> -->
                                      <div class="form-group">
                                          <button type="submit" class="btn btn-primary">Submit</button>
                                      </div>

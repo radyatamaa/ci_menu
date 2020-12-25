@@ -34,7 +34,7 @@
                                          <th>Username</th>
                                          <th>Password</th>
                                          <th>Fullname</th>
-                                         <th>Hak Akses</th>
+                                         <!-- <th>Hak Akses</th> -->
                                          <th>
                                              &nbsp;
                                          </th>
@@ -54,11 +54,15 @@
                                                         <td><?php echo $ReadDS->username; ?></td>
                                                         <td><?php echo $ReadDS->password; ?></td>
                                                         <td><?php echo $ReadDS->fullname; ?></td>
-                                                        <td><?php echo $ReadDS->hak_akses; ?></td>
-														<td>
-															
-
-														</td>
+                                                        <!-- <td><?php echo $ReadDS->hak_akses; ?></td> -->
+                                                        <td>
+                                                            <a href="<?php echo site_url('Welcome/DataUser/' . $ReadDS->id . '/view'); ?>" class="btn btn-xs btn-info">
+                                                                Edit
+                                                            </a>
+                                                            <a class="btn btn-xs btn-danger" href="">
+                                                                Delete
+                                                            </a>
+                                                        </td>
 													</tr>
 											<?php
 												}

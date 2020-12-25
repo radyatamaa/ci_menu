@@ -26,27 +26,22 @@
                  <div class="box-header with-border">
                      <div class="row">
                          <div class="col-12">
-                             <form role="form">
+                         <form action="<?php echo site_url('Welcome/UpdateDataUser'); ?>" method="post" enctype="multipart/form-data">
                                  <div class="card-body">
-                                     <div class="form-group">
-                                         <label>Username</label>
-                                         <input type="text" class="form-control" placeholder="Username">
+                                    <div class="form-group">
+ 										<label>Username</label>
+ 										<input type="hidden" name="id" value="<?php echo $detail['id']; ?>" class="form-control">
+ 										<input type="text" class="form-control" name="username" value="<?php echo $detail['username']; ?>" placeholder="Username">
                                      </div>
                                      <div class="form-group">
-                                         <label>Password</label>
-                                         <input type="password" class="form-control" placeholder="Password">
+ 										<label>Password</label>
+ 										<input type="hidden" name="id" value="<?php echo $detail['id']; ?>" class="form-control">
+ 										<input type="text" class="form-control" name="password" value="<?php echo $detail['password']; ?>" placeholder="Username">
                                      </div>
                                      <div class="form-group">
-                                         <label>Fullname</label>
-                                         <input type="text" class="form-control" placeholder="Fullname">
-                                     </div>
-                                     <div class="form-group">
-                                         <label>ID Level</label>
-                                         <select class="form-control ">
-                                             <option>
-                                                 Honda
-                                             </option>
-                                         </select>
+ 										<label>Fullname</label>
+ 										<input type="hidden" name="id" value="<?php echo $detail['id']; ?>" class="form-control">
+ 										<input type="text" class="form-control" name="fullname" value="<?php echo $detail['fullname']; ?>" placeholder="Username">
                                      </div>
                                      <div class="form-group">
                                          <button type="submit" class="btn btn-primary">Submit</button>

@@ -41,17 +41,19 @@
 											if (!empty($DataJenisMenu)) {
 												foreach ($DataJenisMenu as $index => $ReadDS) {
 													$index = $index + 1;
-											?>
-
-													<tr>
+                                            ?>
+                                            			<tr>
 														<!-- <td> <input type="checkbox" name="kd_jenis[]" value=" <?php echo $ReadDS->kd_jenis; ?>" /></td> -->
 														<td><?php echo $index; ?></td>
 														<td><?php echo $ReadDS->nama_jenis; ?></td>
-
-														<td>
-															
-
-														</td>
+                                                        <td>
+                                                            <a href="<?php echo site_url('Welcome/DataJenisMenu/' . $ReadDS->id . '/view'); ?>" class="btn btn-xs btn-info">
+                                                                Edit
+                                                            </a>
+                                                            <a class="btn btn-xs btn-danger" href="">
+                                                                Delete
+                                                            </a>
+                                                        </td>
 													</tr>
 											<?php
 												}

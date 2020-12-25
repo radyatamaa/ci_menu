@@ -23,12 +23,13 @@
                                  <thead>
                                      <tr>
                                          <th>No</th>
-                                         <th>Kode Pesanan</th>
-                                         <th>Nama Pemesan</th>
-                                         <th>Nomor Meja</th>
+                                         <th>No Meja</th>
                                          <th>Nama Menu</th>
-                                         <th>Quantity</th>
+                                         <th>QTY</th>
+                                         <th>Total Harga Menu</th>
                                          <th>Total Harga</th>
+                                         <th>Status</th>
+                                         <th>Waktu Order</th>
                                          <!-- <th>
                                              &nbsp;
                                          </th> -->
@@ -36,26 +37,34 @@
                                  </thead>
                                  <tbody>
                                      <tr>
-                                         <td>ID</td>
-                                         <td>Trident</td>
-                                         <td>Internet
-                                             Explorer 4.0
-                                         </td>
-                                         <td>Win 95+</td>
-                                         <td> 4</td>
-                                         <td>X</td>
-                                         <td>
-                                             <a class="btn btn-xs btn-info" href="">
-                                                Proses
-                                             </a>
-                                             <a class="btn btn-xs btn-danger" href="">
-                                                Diantar
-                                             </a>
-                                             <a class="btn btn-xs btn-primary" href="">
-                                                Sudah Dibayar
-                                             </a>
+                                     <?php
+											if (!empty($DataOrder)) {
+												foreach ($DataOrder as $index => $ReadDS) {
+													$index = $index + 1;
+											?>
+													<tr>
+														<!-- <td> <input type="checkbox" name="kd_jenis[]" value=" <?php echo $ReadDS->id; ?>" /></td> -->
+														<td><?php echo $index; ?></td>
+                                                        <td><?php echo $ReadDS->no_meja; ?></td>
+                                                        <td><?php echo $ReadDS->nama_menu; ?></td>
+                                                        <td><?php echo $ReadDS->qty; ?></td>
+                                                        <td><?php echo $ReadDS->total_harga_menu; ?></td>
+                                                        <td><?php echo $ReadDS->total_harga; ?></td>
+                                                        <td><?php echo $ReadDS->status; ?></td>
+                                                        <td><?php echo $ReadDS->tgl_order; ?></td>
 
-                                         </td>
+                                                        <td>
+                                                            <a href="<?php echo site_url('Welcome/UpdateStatus?id=' . $ReadDS->id); ?>" class="btn btn-xs btn-info">
+                                                                 Confirmasi Pembayaran
+                                                            </a>
+                                                            <!-- <a href="<?php echo site_url('Welcome/DeleteDataOrder/' . $ReadDS->id); ?>" class="btn btn-xs btn-danger">
+                                                                 Delete
+                                                            </a> -->
+                                                        </td>
+													</tr>
+											<?php
+												}
+										} ?>
                                      </tr>
                                  </tbody>
                              </table>

@@ -9,7 +9,6 @@
          </div><!-- /.container-fluid -->
      </div>
      <!-- /.content-header -->
-
      <!-- Main content -->
      <section class="content">
          <div class="container-fluid">
@@ -51,8 +50,8 @@
                                                                 Edit
                                                             </a>
                                                             <a href="<?php echo site_url('Welcome/DeleteDataCompany/' . $ReadDS->id); ?>" class="btn btn-xs btn-danger">
-                                                                 Delete
-                                                            </a>
+                                                 Delete
+                                             </a>
                                                         </td>
 													</tr>
 											<?php

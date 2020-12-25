@@ -34,6 +34,7 @@
                                          <th>Harga</th>
                                          <th>Deskripsi</th>
                                          <th>Jenis Menu</th>
+                                         <th>Nama Perusahaan</th>
                                          <th>
                                              &nbsp;
                                          </th>
@@ -51,17 +52,18 @@
 														<!-- <td> <input type="checkbox" name="kd_jenis[]" value=" <?php echo $ReadDS->kd_jenis; ?>" /></td> -->
 														<td><?php echo $index; ?></td>
 														<td><?php echo $ReadDS->nama_menu; ?></td>
-                                                        <td><?php echo $ReadDS->foto_menu; ?></td>
+                                                        <td><img width="50px" height="50px" src="<?php echo base_url('upload/' . $ReadDS->foto_menu); ?>"></td>
                                                         <td><?php echo $ReadDS->harga_menu; ?></td>
                                                         <td><?php echo $ReadDS->deskripsi_menu; ?></td>
-                                                        <td><?php echo $ReadDS->nama_menu; ?></td>
+                                                        <td><?php echo $ReadDS->nama_jenis; ?></td>
+                                                        <td><?php echo $ReadDS->nama_company; ?></td>
                                                         <td>
-                                             <a href="<?php echo site_url('Welcome/VFormUpdateLaporanKerusakan'); ?>" class="btn btn-xs btn-info">
-                                                 Edit
-                                             </a>
-                                             <a href="<?php echo site_url('Welcome/DeleteDataPrincipal/' . $ReadDS->kd_principal); ?>" class="btn btn-xs btn-danger">
+                                                        <a href="<?php echo site_url('Welcome/DataMenu/' . $ReadDS->id . '/view'); ?>" class="btn btn-xs btn-primary">
+                                                                 Edit
+                                                        <!-- </a>
+                                                             <a href="<?php echo site_url('Welcome/DeleteDataMenu/' . $ReadDS->id); ?>" class="btn btn-xs btn-danger">
                                                  Delete
-                                             </a>
+                                             </a> -->
 
                                                         </td>
 													</tr>

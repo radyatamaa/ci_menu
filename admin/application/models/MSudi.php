@@ -93,6 +93,17 @@ class MSudi extends CI_Model
         $query = $this->db->get();
         return $query;
     }
+
+    function GetData2JoinBaru($tbl1, $tbl2, $tbl3, $param, $param2)
+    {
+        $this->db->select('*');
+        $this->db->from($tbl1);
+        $this->db->join($tbl2, $param);
+        $this->db->join($tbl3, $param2);
+        // $this->db->order_by("kd_setting_pembayaran_ta", "asc");
+        $query = $this->db->get();
+        return $query;
+    }
     function GetData3Join($tbl1, $tbl2, $tbl3, $tbl4, $param)
     {
         $this->db->select('*');

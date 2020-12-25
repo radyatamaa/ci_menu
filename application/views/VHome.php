@@ -29,12 +29,16 @@
               </ul>
               <!-- Tab panes -->
               <div class="tab-content">
-                <div class="tab-pane fade in active" id="1">
+              <?php if (count($DataJenis) > 0) {
+                      foreach($DataJenis as $index => $jenis){
+                        
+                    ?>
+                <div class="tab-pane fade in <?php  if($index == 0){ echo 'active'; }?>" id="<?php echo $jenis->id; ?>">
                   <div class="mu-tab-content-area">
                     <div class="row">
                     
-                    <?php if (count($DataMenu) > 0) {
-                      foreach($DataMenu as $index => $menu){
+                    <?php if (count($jenis->DataMenu) > 0) {
+                      foreach($jenis->DataMenu as $index => $menu){
                         
                     ?>
 
@@ -93,71 +97,8 @@
                  </div>
                 </div>
 
-                <div class="tab-pane fade" id="2">
-                  <div class="mu-tab-content-area">
-                    <div class="row">
-
-                    <?php if (count($DataMenuNonCoffe) > 0) {
-                      foreach($DataMenuNonCoffe as $index => $menu){
-                        
-                    ?>
-
-                    <?php if ($index % 2 != 0){  ?>
-
-                      <div class="col-md-6">
-                        <div class="mu-tab-content-left">
-                          <ul class="mu-menu-item-nav">
-                            <li>
-                              <div class="media">
-                              <div class="media-left">
-                                  <a href="#">
-                                  <img  class="media-object" src="<?php echo base_url('upload/' . $menu->foto_menu); ?>" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><?php echo $menu->nama_menu . ' ' . $menu->nama_company; ?></h4>
-                                  <span class="mu-menu-price"><?php echo 'Rp. ' . $menu->harga_menu; ?></span>
-                                  <input type="hidden" name="id_menu[]" value="<?php echo $menu->id; ?>">                  
-                                  <p><input class="mu-menu-price" type="number" name="qty[]" min="1" max="100"></p>
-                                  <p><?php echo $menu->deskripsi_menu; ?></p>
-                                </div>
-                              </div>
-                            </li>
-                          </ul>   
-                        </div>
-                      </div>
-
-                    <?php }else{  ?>
-
-                     <div class="col-md-6">
-                       <div class="mu-tab-content-right">
-                          <ul class="mu-menu-item-nav">
-                            <li>
-                              <div class="media">
-                              <div class="media-left">
-                                  <a href="#">
-                                  <img  class="media-object" src="<?php echo base_url('upload/' . $menu->foto_menu); ?>" alt="img">
-                                  </a>
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading"><?php echo $menu->nama_menu . ' ' . $menu->nama_company; ?></h4>
-                                  <span class="mu-menu-price"><?php echo 'Rp. ' . $menu->harga_menu; ?></span>
-                                  <input type="hidden" name="id_menu[]" value="<?php echo $menu->id; ?>">                  
-                                  <p><input class="mu-menu-price" type="number" name="qty[]" min="1" max="100"></p>
-                                  <p><?php echo $menu->deskripsi_menu; ?></p>
-                                </div>
-                              </div>
-                            </li>
-                          </ul>   
-                       </div>
-                     </div>
-                    
-                    <?php }} }?>
-
-                   </div>
-                 </div>
-                </div>
-
+         
+                      <?php }} ?>
                 <div class="form-group">
                 <input id="no_meja" name="no_meja" type="text" class="form-control" placeholder="No Meja">
                 </div>

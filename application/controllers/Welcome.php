@@ -11,18 +11,15 @@ class Welcome extends CI_Controller
 	}
 	public function index()
 	{
-		// if ($this->session->userdata('Login')) {
-		// 	$data['nama'] = $this->session->userdata('nama');
-		// 	$data['level'] = $this->session->userdata('level');
-
+		
 		$data['DataJenis'] = $this->MSudi->GetData('tbl_jenis_menu');
-		$data['DataMenu'] = $this->MSudi->GetDataJoinWhereMenu('tbl_menu','tbl_company','tbl_menu.id_company = tbl_company.id','id_jenis_menu','1')->result();
-		$data['DataMenuNonCoffe'] = $this->MSudi->GetDataJoinWhereMenu('tbl_menu','tbl_company','tbl_company.id = tbl_menu.id_company','id_jenis_menu','2')->result();
+		foreach($data['DataJenis'] as $index => $dataJenis){
+			$dataMenu = $this->MSudi->GetDataJoinWhereMenu('tbl_menu','tbl_company','tbl_menu.id_company = tbl_company.id','id_jenis_menu',$dataJenis->id)->result();
+			$data['DataJenis'][$index]->DataMenu = $dataMenu;
+		}
 		$data['content'] = 'VHome';
 		$this->load->view('welcome_message', $data);
-		// } else {
-		// 	redirect(site_url('Login'));
-		// }
+		
 	}
 
 	public function AddOrder()

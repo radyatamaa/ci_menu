@@ -52,7 +52,7 @@
 														<!-- <td> <input type="checkbox" name="kd_jenis[]" value=" <?php echo $ReadDS->kd_jenis; ?>" /></td> -->
 														<td><?php echo $index; ?></td>
 														<td><?php echo $ReadDS->nama_menu; ?></td>
-                                                        <td><img width="50px" height="50px" src="<?php echo base_url('upload/' . $ReadDS->foto_menu); ?>"></td>
+                                                        <td><img width="50px" height="50px" src="<?php echo $ReadDS->foto_menu; ?>"></td>
                                                         <td><?php echo $ReadDS->harga_menu; ?></td>
                                                         <td><?php echo $ReadDS->deskripsi_menu; ?></td>
                                                         <td><?php echo $ReadDS->nama_jenis; ?></td>

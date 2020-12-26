@@ -192,13 +192,15 @@ class Welcome extends CI_Controller
 		$this->load->library('upload', $config);
 		if (!$this->upload->do_upload('userfile')) {
 			$error = array('error' => $this->upload->display_errors());
-			//redirect(site_url('Welcome/VFormUpdateUser'));
-
+			redirect(site_url('Welcome/VFormAddMenu'));
 		} else {
 			$data = array('upload_data' => $this->upload->data());
 			$update['foto_menu'] = implode($this->upload->data());
+			$filename = site_url('upload/') . 'menu/' . $update['foto_menu'];
+			$replcate = str_replace("index.php/", "", $filename);
+			$replcate = str_replace("\/", "/", $replcate);
+			$update['foto_menu'] = $replcate;
 		}
-
 		$this->MSudi->UpdateData('tbl_menu', 'id', $id, $update);
 		redirect(site_url('Welcome/DataMenu'));
 	}

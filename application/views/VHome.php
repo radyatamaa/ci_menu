@@ -51,7 +51,7 @@
                               <div class="media">
                               <div class="media-left">
                                   <a href="#">
-                                  <img  class="media-object" src="<?php echo base_url('upload/' . $menu->foto_menu); ?>" alt="img">
+                                  <img  class="media-object" src="<?php echo $menu->foto_menu; ?>" alt="img">
                                   </a>
                                 </div>
                                 <div class="media-body">
@@ -76,7 +76,7 @@
                               <div class="media">
                               <div class="media-left">
                                   <a href="#">
-                                  <img  class="media-object" src="<?php echo base_url('upload/' . $menu->foto_menu); ?>" alt="img">
+                                  <img  class="media-object" src="<?php echo  $menu->foto_menu; ?>" alt="img">
                                   </a>
                                 </div>
                                 <div class="media-body">

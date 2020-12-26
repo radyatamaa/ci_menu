@@ -34,22 +34,20 @@
  										<input type="text" class="form-control" name="nama_menu" value="<?php echo $detail['nama_menu']; ?>" placeholder="Username">
                                      </div>
                                      <label>Foto Sebelumnya</label><br>
- 										<img src="<?php echo base_url('upload/' . $detail['foto_menu']); ?>" width="200px" height="200px" style="border-radius: 100%;"><br>
+ 										<img src="<?php echo $detail['foto_menu']; ?>" width="200px" height="200px" style="border-radius: 100%;"><br>
  										<label>Upload Image</label>
  										<input type="file" name="userfile"><br>
                                      <div class="form-group">
  										<label>Harga Menu</label>
- 										<input type="hidden" name="id" value="<?php echo $detail['id']; ?>" class="form-control">
  										<input type="text" class="form-control" name="harga_menu" value="<?php echo $detail['harga_menu']; ?>" placeholder="Username">
                                      </div>
                                      <div class="form-group">
  										<label>Deskripsi Menu</label>
- 										<input type="hidden" name="id" value="<?php echo $detail['id']; ?>" class="form-control">
  										<input type="text" class="form-control" name="deskripsi_menu" value="<?php echo $detail['deskripsi_menu']; ?>" placeholder="Username">
                                      </div>
                                      <div class="form-group">
  										<label>Jenis Menu</label>
- 										<select class="form-control" name="id" required>
+ 										<select class="form-control" name="id_jenis_menu" required>
  											<option selected disabled>Jenis Menu</option>
  											<?php
 												foreach ($detail['jenis'] as $ReadDS) {
@@ -67,7 +65,7 @@
                                      </div>
                                      <div class="form-group">
  										<label>Nama Perusahaan</label>
- 										<select class="form-control" name="id" required>
+ 										<select class="form-control" name="id_company" required>
  											<option selected disabled>Nama Perusahaan</option>
  											<?php
 												foreach ($detail['company'] as $ReadDS) {
